@@ -2,13 +2,14 @@ import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle } from "../../card"
 import Image from "next/image"
 import ProductPrice from "./product-price"
+import { Product } from "@/types"
 
-const ProductCard = ({product}:{product : any}) => {
+const ProductCard = ({product}:{product : Product}) => {
   return (
     <Card className="w-full max-w-sm"> 
         <CardHeader className="p-0 items-center">
             <Link
-            href={`/products/${product.slug}`}
+            href={`/product/${product.slug}`}
             > 
             <Image 
             src={product.images[0]} 
@@ -22,7 +23,7 @@ const ProductCard = ({product}:{product : any}) => {
         <CardContent className="p-4 grid gap-4"> 
             <div className="text-xs">{product.brand}</div>
             <Link 
-            href={`/products/${product.slug}`}
+            href={`/product/${product.slug}`}
             > 
             <h2 className="text-sm font-medium">{product.name} </h2>
             </Link>
@@ -30,7 +31,7 @@ const ProductCard = ({product}:{product : any}) => {
                 
                 <p>{product.rating} starts</p>
                 {
-                    product.stock > 0 ? (<ProductPrice className="text-red-500" value={product.price}/>) : ( 
+                    product.stock > 0 ? (<ProductPrice className="text-red-500" value={Number(product.price)}/>) : ( 
                         <p className="text-destructive">Out Of Stock </p>
                     )
                 }

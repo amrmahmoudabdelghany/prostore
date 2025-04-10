@@ -1,3 +1,4 @@
+
 import { cn } from "@/lib/utils";
 
 
@@ -7,7 +8,6 @@ const ProductPrice = ({value , className} : {value : number , className?:string}
 
     const [int , float] = strValue.split(".") ; 
 
-    console.log('int' , int , 'float' , float) ;
 
   return (
    <p className={cn('text-xl' , className)}> 
