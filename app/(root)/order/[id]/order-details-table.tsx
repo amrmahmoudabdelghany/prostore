@@ -29,15 +29,18 @@ import {
 } from "@/lib/actions/order.actions";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import StripePayment from "./stripe-payment";
 
 const OrderDetailsTable = ({
   order,
   paypalClientId,
   isAdmin,
+  stripeClientSecret,
 }: {
   order: Order;
   paypalClientId: string;
   isAdmin: boolean;
+  stripeClientSecret: string | null;
 }) => {
   const {
     id,
@@ -149,7 +152,7 @@ const OrderDetailsTable = ({
   return (
     <>
       <h1 className="py-4 text-2xl">Order {formatUUID(id)}</h1>
-      <div className="grid md:grid-cols-3 md:gap-5">
+      <div className="grid gap-2 md:grid-cols-3 md:gap-5">
         <div className="col-span-2 space-4-y overflow-x-auto">
           <Card>
             <CardContent className="p-4 gap-4">
@@ -239,6 +242,17 @@ const OrderDetailsTable = ({
                 <div>Total</div>
                 <div>{formatCurrency(totalPrice)}</div>
               </div>
+              {!isPaid &&
+                paymentMethod == "Stripe" &&
+                stripeClientSecret !== null && (
+                  <div>
+                    <StripePayment
+                      orderId={order.id}
+                      clientSecret={stripeClientSecret}
+                      priceInCents={Number(order.totalPrice) * 100}
+                    />
+                  </div>
+                )}
               {!isPaid && paymentMethod === "PayPal" && (
                 <div>
                   <PayPalScriptProvider
