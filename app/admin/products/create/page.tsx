@@ -3,7 +3,7 @@ import { requireAdmin } from "@/lib/auth-gurd";
 import { Metadata } from "next";
 import React from "react";
 
-export const metdata: Metadata = {
+export const metadata: Metadata = {
   title: "Create Product",
 };
 const CreateProductPage = async () => {

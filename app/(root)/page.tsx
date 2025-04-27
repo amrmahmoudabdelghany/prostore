@@ -9,6 +9,8 @@ import { convertToPlainObject } from "@/lib/utils";
 import { LATEST_PRODUCTS_LIMIT } from "@/lib/constants";
 import ProductCarousel from "@/components/ui/shared/product/product-carousel";
 import ViewAllProductButton from "@/components/view-all-products-button";
+import IconBoxes from "@/components/icon-boxes";
+import DealCountdown from "@/components/deal-countdown";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -31,6 +33,8 @@ export default async function Home() {
         limit={LATEST_PRODUCTS_LIMIT}
       />
       <ViewAllProductButton />
+      <DealCountdown />
+      <IconBoxes />
     </>
   );
 }
